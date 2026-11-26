@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uniform Order Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Uniform Order Tracker</h1>
+        <button id="theme-toggle" class="theme-toggle">🌙 Dark Mode</button>
+    </div>
+    
+    <div class="nav-tabs">
+        <button class="nav-btn active" data-tab="dashboard">Orders Dashboard</button>
+        <button class="nav-btn" data-tab="new-order">New Order</button>
+        <button class="nav-btn" data-tab="officers">Officers</button>
+        <button class="nav-btn" data-tab="catalog">Uniform Catalog</button>
+    </div>
+    
+    <div class="tab-content">
+        <div id="dashboard-tab" class="tab-pane active">
+            <div class="dashboard-header">
+                <h2>Orders Dashboard</h2>
+                <div class="dashboard-controls">
+                    <select id="status-filter">
+                        <option value="all">All Statuses</option>
+                        <option value="Ordered">Ordered</option>
+                        <option value="Partially Delivered">Partially Delivered</option>
+                        <option value="Ready for Collection">Ready for Collection</option>
+                        <option value="Partially Collected">Partially Collected</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                    <input type="text" id="search-input" placeholder="Search by officer or item...">
+                    <button id="export-btn">Export CSV</button>
+                </div>
+            </div>
+            <div id="orders-container" class="orders-container"></div>
+        </div>
+        
+        <div id="new-order-tab" class="tab-pane">
+            <div class="order-form-container">
+                <h2>Create New Order</h2>
+                <form id="order-form">
+                    <div class="form-group">
+                        <label>Officer:</label>
+                        <select id="officer-select" required></select>
+                    </div>
+                    <div class="cart-section">
+                        <h3>Order Items</h3>
+                        <div id="cart-items" class="cart-items"></div>
+                        <button type="button" id="add-item-btn" class="add-btn">Add Item</button>
+                    </div>
+                    <button type="submit" class="submit-btn">Place Order</button>
+                </form>
+            </div>
+        </div>
+        
+        <div id="officers-tab" class="tab-pane">
+            <div class="officers-container">
+                <h2>Officers Management</h2>
+                <div class="officers-header">
+                    <button id="add-officer-btn" class="add-btn">Add Officer</button>
+                </div>
+                <input type="text" id="officer-search" placeholder="Search officers...">
+                <table id="officers-table" class="data-table">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Surname</th>
+                            <th>Roll Number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div id="catalog-tab" class="tab-pane">
+            <div class="catalog-container">
+                <h2>Uniform Catalog</h2>
+                <div class="catalog-header">
+                    <button id="add-item-btn-catalog" class="add-btn">Add Uniform Item</button>
+                </div>
+                <input type="text" id="catalog-search" placeholder="Search items...">
+                <div id="uniform-items-container" class="items-grid"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="officer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modal-title">Add Officer</h3>
+            <form id="officer-form">
+                <input type="text" id="officer-first-name" placeholder="First Name" required>
+                <input type="text" id="officer-surname" placeholder="Surname" required>
+                <input type="text" id="officer-roll-number" placeholder="Roll Number" required>
+                <button type="submit" class="submit-btn">Save</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="uniform-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="uniform-modal-title">Add Uniform Item</h3>
+            <form id="uniform-form">
+                <input type="text" id="uniform-name" placeholder="Item Name" required>
+                <input type="text" id="uniform-sizes" placeholder="Sizes (comma separated)" required>
+                <button type="submit" class="submit-btn">Save</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="order-modal-title">Order Details</h3>
+            <div id="order-modal-content"></div>
+        </div>
+    </div>
+    
+    <div id="toast-container" class="toast-container"></div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
